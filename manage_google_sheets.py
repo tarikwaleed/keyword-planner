@@ -7,22 +7,7 @@ from urllib.parse import urlparse
 from helpers import is_url
 from pygsheets.exceptions import WorksheetNotFound, SpreadsheetNotFound
 from pygsheets.spreadsheet import Spreadsheet
-from pygsheets.worksheet import  Worksheet
-
-
-
-RESULTS_SHEET_NAME = 'results'
-URLS_SHEET_NAME = 'urls'
-try:
-    RESULTS_SHEET = client.open(RESULTS_SHEET_NAME)
-except  SpreadsheetNotFound as ex:
-    print(f'[X] Could not open The Google sheet of name {RESULTS_SHEET} , Make sure it exists')
-    print('Exception {0}', ex)
-try:
-    URLS_SHEET = client.open(URLS_SHEET_NAME)
-except SpreadsheetNotFound as ex:
-    print(f'[X] Could not open The Google sheet of name {0} , Make sure it exists', )
-    print('Exception {0}', ex)
+from pygsheets.worksheet import Worksheet
 
 
 def import_urls_from_sheet(sheet: Spreadsheet) -> list:
