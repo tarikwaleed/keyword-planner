@@ -32,19 +32,23 @@ if __name__ == '__main__':
     output_sheet_name=args.output_sheet
     try:
         RESULTS_SHEET = client.open(output_sheet_name)
-    except  SpreadsheetNotFound as ex:
-        print(f'[✘] Could not open The Google sheet of name {output_sheet_name} , Make sure it exists')
+    except  SpreadsheetNotFound:
+        print(f'[✘] Could not open The Google sheet with the name {output_sheet_name} , Make sure it exists')
     try:
         URLS_SHEET = client.open(input_sheet_name)
-    except SpreadsheetNotFound as ex:
+    except SpreadsheetNotFound:
         print(f'[✘] Could not open The Google sheet of name {input_sheet_name} , Make sure it exists', )
 
     list_of_urls=import_urls_from_sheet(URLS_SHEET)
+    #TODO: handle exceptions
     for url in list_of_urls:
+
+        # buile_the_list_of_keywords is going to return nothing if the url given has no keywords
         list_of_keywords=build_the_list_of_keywords(url)
-        dataframe=convert_list_of_keywords_to_dataframe(list_of_keywords)
-        worksheet=create_worksheet_for_url(RESULTS_SHEET,url)
-        export_dataframe_to_worksheet(dataframe,worksheet)
+        if(len(list_of_keywords)>0):
+            dataframe=convert_list_of_keywords_to_dataframe(list_of_keywords)
+            worksheet=create_worksheet_for_url(RESULTS_SHEET,url)
+            export_dataframe_to_worksheet(dataframe,worksheet)
         
 
     print('الحمد لله رب العالمين♥')

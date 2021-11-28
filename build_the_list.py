@@ -21,7 +21,7 @@ def build_the_list_of_keywords(page_url: str) -> list:
             page_url=page_url,
             keyword_texts=[],
         )
-        if(len(list_of_keywords)!=0):
+        if(len(list_of_keywords)>0):
             print("[✔]  The list Built Successfully")
         else:
             print('[✖] No keywords found for this website')
